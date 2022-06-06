@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if current_user.id == 2 or  current_user.id == 3 %}
+
+<div class="container w-50">
+
+<table class="table">
+    <tr>
+        <th>SN</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th></th>
+        <th>Action</th>
+    </tr>
+    {% for alladmin in alladmins %}
+    <tr>
+        
+        <td>{{ loop.index }}</td>
+        <td>{{ alladmin.id }}</td>
+        <td>{{ alladmin.name }}</td>
+        <td> <a href="{{url_for('updateadmin', id=alladmin.id)}}">Update</a> </td>
+        <td> <a href="{{url_for('deleteadmin', id=alladmin.id)}}">Delete</a> </td>
+        
+        
+    </tr>
+    {% endfor %}
+</table>
+
+<h3> <a href="{{url_for('admin')}}">Add Admins</a> </h3>
+</div>
+{% else %}
+<h3>Only Admins Are Allowed To Access This Page</h3>
+{% endif %}
+{% endblock %}

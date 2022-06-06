@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+        {% if current_user.is_authenticated %}
+        <h3>You Are Already Logged In. Go To <a href="{{url_for('dashboard')}}">Dashboard</a> </h3>
+        {% else %}
+        <div class="container w-50 my-5">
+            <h1>Login Here</h1>
+            <form action="{{login}}" method="POSt">
+
+                {{form.hidden_tag()}}
+
+                {{form.username.label(class='form-control-label')}}
+                {% if form.username.errors %}
+                {{form.username(class='form-control form-control-lg is-invalid')}}
+                {% for error in form.username.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+                {% else %}
+                {{form.username(class='form-control form-control-lg')}}
+                {% endif %}
+
+
+                <br>
+
+                {{form.password.label(class='form-control-label')}}
+                {% if form.password.errors %}
+                {{form.password(class='form-control form-control-lg is-invalid')}}
+                {% for error in form.password.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+                {% else %}
+                {{form.password(class='form-control form-control-lg')}}
+                {% endif %}
+
+
+                <br>
+
+                {{form.submit(class='form-control form-control-lg')}}
+
+            </form>
+            <h2>Not Registered Yet <a href="{{url_for('registration')}}">Register Here</a> </h2>
+        </div>
+        {% endif %}
+    {% endblock %}
+
+
+            

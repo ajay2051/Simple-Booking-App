@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="mb-3 my-5 ajax">
+    <h3><label for="admin">Choose Time Slot</label></h3>
+    <br>
+    
+    <input type="checkbox" name="date_time_slot" id="date_time_slot" value="{{timeslot}}">{{timeslot}}
+    
+</div>
+
+{% endblock %}

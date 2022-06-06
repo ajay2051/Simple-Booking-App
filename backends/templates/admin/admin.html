@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if current_user.id == 2 or  current_user.id == 3 %}
+<h3>This is Admin Page</h3>
+
+{% if bookings|length == 0 %}
+<h3>No Bookings</h3>
+{% else %}
+
+<table class="table">
+    <tr>
+        <th>Booking Id</th>
+        <th>User Id</th>
+        <th>Admin Id</th>
+        <th>Booking Date</th>
+        <th>Booking Timeslot</th>
+        <th>Booking Purpose</th>
+        <th>Booking Duration</th>
+        
+    </tr>
+{% for booking in bookings %}
+<tr>
+    <td>{{booking.id}}</td>
+    <td>{{booking.user_id}}</td>
+    <td>{{booking.admin_id}}</td>
+    <td>{{booking.date}}</td>
+    <td>{{booking.timeslot_id}}</td>
+    <td>{{booking.appointment_purpose}}</td>
+    <td>{{booking.duration}}</td>
+    <td><a href="{{url_for('status')}}">Action</a></td>
+</tr>
+      
+{% endfor %}
+</table>
+{% endif %}
+{% else %}
+<h3>Only Admins Are Allowed To Access This Page</h3>
+{% endif %}
+{% endblock %}

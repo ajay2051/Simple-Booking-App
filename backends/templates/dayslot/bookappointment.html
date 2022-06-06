@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if current_user.id == 2 or  current_user.id == 3 %}
+
+<h3>Only Customers Are Allowed Book Appointment not Admins</h3>
+
+{% else %}
+
+
+
+<div class="container w-50 my-5">
+
+    <form action="{{bookappointment}}" method="POST" id="bookForm">
+
+        <div class="mb-3">
+            <h3><label for="username">Username</label></h3>
+            <br>
+            <input type="number" name="user_id" id="user_id" value="{{current_user.id}}" >{{current_user.username}}
+        </div>
+            
+            
+
+
+        <div class="mb-3">
+            <h3><label for="admin">Admin</label></h3>
+            <br>
+            {% for alladmin in alladmins %}
+            <input type="radio" name="admin_id" id="admin_id" value="{{alladmin.id}}">{{alladmin.name}}
+            {% endfor %}
+        </div>
+
+
+        <div class="mb-3 my-5">
+            <h3><label for="users">Select Date</label></h3>
+            <input type="date" name="date" id="appointment_date" class="date"/>
+        </div>
+
+
+
+        <div class="mb-3 my-5">
+            <h3><label for="admin">Choose Time Slot</label></h3>
+            <br>
+            {% for alltimeslot in alltimeslots %}
+            <input type="checkbox" name="timeslot_id" id="timeslot_id" value="{{alltimeslot.id}}">{{alltimeslot.slot}}
+            {% endfor %}
+        </div>
+
+
+        <div class="mb-3">
+            <h3><label for="purpose">Appointment Purpose</label></h3>
+            <textarea name="appointment_purpose" id="appointment_purpose" cols="30" rows="10"></textarea>
+        </div>
+
+
+        <div class="mb-3">
+            <h3><label for="duration">Time Duration</label></h3>
+            <input type="text" name="duration" id="duration">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Book Now</button>
+
+    </form>
+</div>
+{% endif %}
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        console.log('DOM fully loaded and parsed');
+        document.getElementById('appointment_date')
+        .addEventListener('change', function(e){
+            const request = new Request('http://127.0.0.1:5000/datetimeslot')
+            fetch (request).then(response => console.log(response))
+            
+        })
+    });
+
+</script>
+
+{% endblock %}
+
+
+

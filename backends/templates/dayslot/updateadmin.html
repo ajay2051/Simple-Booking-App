@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if current_user.id == 2 or  current_user.id == 3 %}
+<div class="container w-50 my-5">
+    <form action="{{admin}}" method="POST">
+        {{form.hidden_tag()}}
+
+        {{form.admin.label(class='form-control-label')}}
+        {% if form.admin.errors %}
+        {{form.admin(class='form-control form-control-lg is-invalid')}}
+        {% for error in form.admin.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+        {% else %}
+        {{form.admin(class='form-control form-control-lg')}}
+        {% endif %}
+
+        <br>
+
+        {{form.update(class='form-control form-control-lg')}}
+
+    </form>
+</div>
+{% else %}
+<h3>Only Admins Are Allowed To Access This Page</h3>
+{% endif %}
+{% endblock %}

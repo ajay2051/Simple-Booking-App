@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if current_user.id == 2 or  current_user.id == 3 %}
+<div class="container">
+    <table class="table"> 
+        <tr>
+            <th>
+                Booking Id
+            </th>
+            <th>Status</th>
+        </tr>
+        <form action="{{status}}" method="POST">
+            <tr>
+                
+                
+                
+                <td>
+                <select class="form-control" id="booking_id" name="booking_id">
+                {% for booking in bookings %}
+                <OPTION value={{booking.id}}>{{booking.id}}</OPTION>
+                {% endfor %}
+                </td>
+                
+                
+                
+                <td>
+                    <input type="radio" name="status" id="1" value="1">Approve
+                    <input type="radio" name="status" id="0" value="0">Reject
+                </td>
+                <td><input type="submit" value="Submit" name="submit"></td>
+            </tr>
+        </form>
+
+    </table>
+</div>
+{% else %}
+<h3>Only Admins Are Allowed To Access This Page</h3>
+{% endif %}
+{% endblock %}

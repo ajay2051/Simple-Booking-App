@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Welcome {{current_user}}</h1>
+<h1>This is Dashboard</h1>
+
+{% if current_user.id == 2 or  current_user.id == 3 %}
+<h3> <a href="{{url_for('adminpage')}}">All Bookings</a> </h3>
+<h3> <a href="{{url_for('alladmins')}}">All Admins</a> </h3>
+<h3> <a href="{{url_for('alldays')}}">All Available Days</a> </h3>
+<h3> <a href="{{url_for('allslots')}}">All Available Time Slots</a> </h3>
+{% else %}
+<h3> <a href="{{url_for('bookappointment')}}">Book Your Appointment</a> </h3>
+{% endif %}
+<h3> <a href="{{url_for('logout')}}">Log Out</a> </h3>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if current_user.id == 2 or  current_user.id == 3 %}
+<div class="container w-50 my-5">
+    <table class="table">
+        <h3>All Available Days</h3>
+        
+        {% for allday in alldays %}
+        <tr>
+        <td>{{ allday.id }}</td>
+        <td>{{ allday.name }}</td>
+        <td> <a href="{{url_for('deleteday', id=allday.id)}}">Delete</a> </td>
+        {% endfor %}
+        </tr>
+        
+        
+    </table>
+    <h3> <a href="{{ url_for('day') }}">Add Days</a> </h3>
+</div>
+{% else %}
+<h3>Only Admins Are Allowed To Access This Page</h3>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if current_user.id == 2 or  current_user.id == 3 %}
+<div class="container w-50 my-5">
+    <form action="{{timeslot}}" method="POST">
+        {{form.hidden_tag()}}
+
+        {{form.time_slot.label(class='form-control-label')}}
+        {% if form.time_slot.errors %}
+        {{form.time_slot(class='form-control form-control-lg is-invalid')}}
+        {% for error in form.time_slot.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+        {% else %}
+        {{form.time_slot(class='form-control form-control-lg')}}
+        {% endif %}
+
+        <br>
+
+        {{form.add(class='form-control form-control-lg')}}
+
+    </form>
+
+    {% for alltime in alltimes %}
+    <h3>{{alltime.name}}</h3>
+    {% endfor %}
+    
+    <h3> <a href="{{ url_for('allslots') }}">All Available Time Slots</a> </h3>
+
+</div>
+{% else %}
+<h3>Only Admins Are Allowed To Access This Page</h3>
+{% endif %}
+{% endblock %}

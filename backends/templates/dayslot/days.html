@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if current_user.id == 2 or  current_user.id == 3 %}
+<div class="container w-50 my-5">
+    <form action="{{day}}" method="POST">
+        {{form.hidden_tag()}}
+
+        {{form.add_day.label(class='form-control-label')}}
+        {% if form.add_day.errors %}
+        {{form.add_day(class='form-control form-control-lg is-invalid')}}
+        {% for error in form.add_day.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+        {% else %}
+        {{form.add_day(class='form-control form-control-lg')}}
+        {% endif %}
+
+        <br>
+
+        <div class="mb-3 my-5">
+            <h3><label for="admin">Choose Time Slot</label></h3>
+            <br>
+            {% for alltimeslot in alltimeslots %}
+            <input type="checkbox" name="timeslot_id" id="timeslot_id" value="{{alltimeslot.id}}">{{alltimeslot.slot}}
+            {% endfor %}
+        </div>
+
+        {{form.add(class='form-control form-control-lg')}}
+
+    </form>
+
+    {% for allday in alldays %}
+    <h3>{{allday.name}}</h3>
+    {% endfor %}
+
+    <h3> <a href="{{ url_for('alldays') }}">All Available Days</a> </h3>
+
+</div>
+{% else %}
+<h3>Only Admins Are Allowed To Access This Page</h3>
+{% endif %}
+{% endblock %}

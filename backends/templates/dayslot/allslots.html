@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if current_user.id == 2 or  current_user.id == 3 %}
+<div class="container w-50 my-5">
+    <table class="table">
+        <h3>All Available Time Slots</h3>
+        
+        {% for alltimeslot in alltimeslots %}
+        <tr>
+        <td>{{ alltimeslot.id }}</td>
+        <td>{{ alltimeslot.slot }}</td>
+        
+        <td> <a href="{{url_for('deleteslots', id=alltimeslot.id)}}">Delete</a> </td>
+        {% endfor %}
+        </tr>
+        
+        
+    </table>
+    <td> <a href="{{url_for('timeslot')}}">Add Time Slot</a> </td>
+    
+</div>
+{% else %}
+<h3>Only Admins Are Allowed To Access This Page</h3>
+{% endif %}
+{% endblock %}
